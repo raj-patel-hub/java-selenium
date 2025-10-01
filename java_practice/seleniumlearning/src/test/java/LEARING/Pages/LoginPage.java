@@ -34,4 +34,10 @@ public class LoginPage {
     public void clickFinalLogin() {
         driver.findElement(LoginLocators.finalLoginBtn).click();
     }
+
+    public void verifyEltaMDLogoVisible() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LoginLocators.EltaMDLogo)).isDisplayed();
+    }
+
+
 }

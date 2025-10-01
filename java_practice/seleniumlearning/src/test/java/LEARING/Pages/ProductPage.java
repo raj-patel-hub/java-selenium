@@ -64,5 +64,70 @@ public class ProductPage {
         WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.checkoutBtn));
         checkoutButton.click();
     }
-}  // <-- ✅ missing closing bracket for class added
+
+    public void verifyProductTitleVisible() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ProductLocators.ProductTitle)).isDisplayed();
+    }
+
+    public void increaseQuantity() {
+        WebElement plusButton = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.increaseQtyBtn));
+        plusButton.click();
+        wait.until(driver -> getProductQuantity() > 1); // wait until value updates
+    }
+
+    public void decreaseQuantity() {
+        WebElement minusButton = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.decreaseQtyBtn));
+        minusButton.click();
+        wait.until(driver -> getProductQuantity() == 1); // wait until value updates
+    }
+
+    public int getProductQuantity() {
+        WebElement qtyField = wait.until(ExpectedConditions.visibilityOfElementLocated(ProductLocators.quantityField));
+        String qtyValue = qtyField.getText();
+
+        if (qtyValue.isEmpty()) {
+            throw new RuntimeException("❌ Quantity value is empty for locator: " + ProductLocators.quantityField.toString());
+        }
+
+        return Integer.parseInt(qtyValue);
+    }
+
+    public void hoverToEltaMDLogo() {
+        WebElement logoElement = wait.until(ExpectedConditions.visibilityOfElementLocated(ProductLocators.EltaMDLogo));
+        actions.moveToElement(logoElement).perform();
+    }
+
+
+    // ✅ Method to remove product from mini cart
+    public void removeProductFromMiniCart() {
+        WebElement removeBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(ProductLocators.miniCartRemoveButton)
+        );
+        removeBtn.click();
+        System.out.println("Clicked on Remove button");
+    }
+
+    // ✅ Method to verify empty cart message
+    public boolean verifyEmptyCartMessage() {
+        WebElement emptyMsg = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(ProductLocators.emptyCartMessage)
+        );
+        return emptyMsg.isDisplayed();
+    }
+
+    public boolean verifyCartHeadingVisible() {
+        WebElement emptyMsg = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(ProductLocators.cartText)
+        );
+        return emptyMsg.isDisplayed();
+    }
+
+    public boolean verifyEmptyCartMessageVisible() {
+        WebElement emptyMsg = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(ProductLocators.emptyCartText)
+        );
+        return emptyMsg.isDisplayed();
+    }
+}
+
 
