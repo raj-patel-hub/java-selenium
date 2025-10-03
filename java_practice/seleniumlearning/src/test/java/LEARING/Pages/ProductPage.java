@@ -1,12 +1,15 @@
 package LEARING.Pages;
 
 import LEARING.Locator.ProductLocators;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public class ProductPage {
     WebDriver driver;
@@ -115,19 +118,130 @@ public class ProductPage {
         return emptyMsg.isDisplayed();
     }
 
-    public boolean verifyCartHeadingVisible() {
+    public void verifyCartHeadingVisible() {
         WebElement emptyMsg = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ProductLocators.cartText)
         );
-        return emptyMsg.isDisplayed();
+        emptyMsg.isDisplayed();
     }
 
-    public boolean verifyEmptyCartMessageVisible() {
+    public void verifyEmptyCartMessageVisible() {
         WebElement emptyMsg = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(ProductLocators.emptyCartText)
         );
-        return emptyMsg.isDisplayed();
+        emptyMsg.isDisplayed();
     }
+
+    public void cLickViewCart() {
+        WebElement viewCartButton = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.viewCartBtn));
+        viewCartButton.click();
+    }
+
+    public void cLickClearALlFilter() {
+        WebElement ClearALlFilter = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.clearAllButton));
+        ClearALlFilter.click();
+    }
+
+    public void cLickSideFilterBestSeller() {
+        WebElement SideFilterBestSeller = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.bestSellerSideFilter));
+        SideFilterBestSeller.click();
+    }
+
+    public void cLickSideFilterBestSellerLabel() {
+        WebElement SideFilterBestSellerLabel = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.bestSellerSideFilterLabel));
+        SideFilterBestSellerLabel.click();
+    }
+
+    public void verifyBestSellerMainTagVisible() {
+        WebElement BestSellerMainTag = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(ProductLocators.bestSellerMainFilter)
+        );
+        BestSellerMainTag.isDisplayed();
+    }
+
+    public void verifyBestSellerLabelsForAllProducts() {
+        List<WebElement> productImages = wait.until(
+                ExpectedConditions.presenceOfAllElementsLocatedBy(ProductLocators.productImages)
+        );
+
+        System.out.println("Total products found: " + productImages.size());
+
+        for (int i = 0; i < productImages.size(); i++) {
+            try {
+                WebElement parentTile = productImages.get(i).findElement(ProductLocators.productImages);
+
+                WebElement label = parentTile.findElement(ProductLocators.bestSellerLabels);
+
+                if (label.isDisplayed()) {
+                    System.out.println("✅ Product " + (i + 1) + " has Best-seller label");
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println("❌ Product " + (i + 1) + " is missing Best-seller label");
+            }
+        }
+    }
+
+    public void cLickFavoriteButton() {
+        WebElement FavoriteButton = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.Favorite));
+        FavoriteButton.click();
+    }
+
+    public void cLickHomeUserIcon() {
+        WebElement HomeUserIcon = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.HomeUserIcon));
+        HomeUserIcon.click();
+    }
+
+    public String addProductToFavoriteAndGetName() {
+        // Get product name from PDP
+        WebElement productNameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                ProductLocators.product
+        ));
+        String productName = productNameElement.getText();
+
+        // Click Favorite button
+        WebElement favoriteBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                ProductLocators.Favorite
+        ));
+        favoriteBtn.click();
+
+        // Wait for popup confirmation
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ProductLocators.addedToFavoritePopup));
+
+        return productName;
+    }
+
+    public boolean verifyProductInFavorites(String expectedProductName) throws InterruptedException {
+
+        Thread.sleep(5000);
+        //Home User Icon
+        WebElement HomeUserIcon = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.HomeUserIcon));
+        HomeUserIcon.click();
+
+        // Navigate to Favorites page
+        WebElement favMenu = wait.until(ExpectedConditions.elementToBeClickable(
+                ProductLocators.UserIconFavorite
+        ));
+        favMenu.click();
+
+        // Get first product name in Favorites
+        WebElement favProduct = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                ProductLocators.favoriteProductName
+        ));
+        String actualProductName = favProduct.getText();
+
+        return actualProductName.equalsIgnoreCase(expectedProductName);
+    }
+
+    public void cLickRemoveButtonAndVerifyPopup() {
+        WebElement removeFromFavoriteBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                ProductLocators.RemoveFromFavoriteButton
+        ));
+        removeFromFavoriteBtn.click();
+
+        // Wait for popup confirmation
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ProductLocators.RemoveFromFavoritePopup));
+    }
+
 }
 
 

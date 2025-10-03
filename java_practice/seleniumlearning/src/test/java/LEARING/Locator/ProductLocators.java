@@ -19,11 +19,25 @@ public class ProductLocators {
     public static By quantityField = By.xpath("(//span[contains(@class,'current-qty')])[2]");
     public static By EltaMDLogo   = By.xpath("//li[contains(@class,'eltamd-brand')]");
     public static By miniCartRemoveButton   = By.xpath("(//div[text()='Remove'])[1]");
-    //public static By miniCartItems = By.xpath("(//div[@class='flex global-cart-items-section'])[1]");
-    //public static By removeButton = By.xpath("//a[contains(text(),'Remove')]");
-    public static By emptyCartMessage = By.xpath("//div[text()='There's nothing here yet.']");
+    public static By emptyCartMessage = By.xpath("//div[contains(@class,'global-cart-empty-view')]");
     public static By cartText = By.xpath("//h1[text()='Cart']");
     public static By emptyCartText = By.xpath("//strong[text()='Your cart is currently empty.']");
+    public static By clearAllButton = By.xpath("(//button[text()='Clear All'])[2]");
+    public static By bestSellerSideFilter = By.xpath("//h3[text()='Best Seller']");
+    public static By bestSellerSideFilterLabel = By.xpath("//label[text()='Best Seller']");
+    public static By bestSellerMainFilter = By.xpath("//div[text()='Best Seller']");
+    public static By productImages = By.xpath("//div[contains(@class,'product-card-main-wrapper')]");
+    public static By bestSellerLabels = By.xpath("//span[text()='Best-seller']");
+    public static By Favorite = By.xpath("(//div[text()='Favorite'])[1]");
+    public static By addedToFavoritePopup = By.xpath("//div[contains(text(),'Added To Favorite')]");
+    public static By HomeUserIcon = By.xpath("//span[contains(@class,'brand-navigation-header_user-icon')]");
+    public static By UserIconFavorite = By.xpath("(//a[text()='Favorites'])[1]");
+    public static By favoriteProductName = By.xpath("//p[contains(@class,'product-name')]");
+    public static By RemoveFromFavoriteButton = By.xpath("//div[text()='Remove from Favorites']");
+    public static By RemoveFromFavoritePopup = By.xpath("//div[contains(text(),'Removed From Favorite')]");
+
+
+
 
 
 

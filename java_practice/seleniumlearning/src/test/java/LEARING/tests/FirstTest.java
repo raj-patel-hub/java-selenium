@@ -19,6 +19,12 @@ public class FirstTest {
         // Run Fourth Test
         FourthTest();
 
+        // Run Fifth Test
+        FiFthTest();
+
+        // Run Sixth Test
+        SixthTest();
+
     }
 
     public static void runProductFlowTest() throws InterruptedException {
@@ -204,6 +210,8 @@ public class FirstTest {
         } else {
             System.out.println("❌ Empty cart message not found!");
         }
+
+        System.out.println("Test Passed!");
         driver.quit();
     }
 
@@ -262,13 +270,105 @@ public class FirstTest {
             System.out.println("❌ Empty cart message not found!");
         }
 
-        productPage.viewCartAndCheckout();
+        productPage.cLickViewCart();
 
         productPage.verifyCartHeadingVisible();
 
         productPage.verifyEmptyCartMessageVisible();
 
+        System.out.println("Test Passed!");
         driver.quit();
+    }
+
+
+    public static void FiFthTest() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://test.cpskinhealthpro.com/");
+        driver.manage().window().maximize();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickConfirm();
+        loginPage.clickLoginBtn();
+        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
+        loginPage.enterPassword("TestimQA@2024");
+        loginPage.clickFinalLogin();
+        System.out.println("Login successful!");
+
+        loginPage.verifyEltaMDLogoVisible();
+
+        Thread.sleep(5000);
+
+        // Product
+        ProductPage productPage = new ProductPage(driver);
+        productPage.selectEltaMD();
+        productPage.goToShop();
+
+        Thread.sleep(5000);
+
+        productPage.hoverToEltaMDLogo();
+
+
+        // Filter
+        productPage.cLickClearALlFilter();
+        Thread.sleep(5000);
+
+        productPage.cLickSideFilterBestSeller();
+        Thread.sleep(5000);
+
+        productPage.cLickSideFilterBestSellerLabel();
+        Thread.sleep(5000);
+
+        productPage.verifyBestSellerMainTagVisible();
+        Thread.sleep(5000);
+
+        productPage.verifyBestSellerLabelsForAllProducts();
+
+
+        System.out.println("Test Passed!");
+        driver.quit();
+
+    }
+
+
+    public static void SixthTest() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://test.cpskinhealthpro.com/");
+        driver.manage().window().maximize();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickConfirm();
+        loginPage.clickLoginBtn();
+        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
+        loginPage.enterPassword("TestimQA@2024");
+        loginPage.clickFinalLogin();
+        System.out.println("Login successful!");
+
+        loginPage.verifyEltaMDLogoVisible();
+
+        Thread.sleep(5000);
+
+        // Product
+        ProductPage productPage = new ProductPage(driver);
+        productPage.selectEltaMD();
+        productPage.goToShop();
+
+        Thread.sleep(5000);
+
+        productPage.hoverToEltaMDLogo();
+        String storedProduct = productPage.addProductToFavoriteAndGetName();
+
+        Thread.sleep(5000);
+
+        if (productPage.verifyProductInFavorites(storedProduct)) {
+            System.out.println("✅ Product successfully added to Favorites!");
+        } else {
+            System.out.println("❌ Product not found in Favorites!");
+        }
+
+        productPage.cLickRemoveButtonAndVerifyPopup();
+        System.out.println("Test Passed!");
+        driver.quit();
+
     }
 
 }
