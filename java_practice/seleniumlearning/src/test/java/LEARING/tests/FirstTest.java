@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import LEARING.Pages.LoginPage;
 import LEARING.Pages.ProductPage;
+import LEARING.Utils.TestData;
 
 public class FirstTest {
     public static void main(String[] args) throws InterruptedException {
@@ -36,8 +37,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 
@@ -85,8 +86,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 
@@ -164,8 +165,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 
@@ -223,8 +224,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 
@@ -289,8 +290,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 
@@ -338,8 +339,8 @@ public class FirstTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConfirm();
         loginPage.clickLoginBtn();
-        loginPage.enterEmail("pcaskinpro_git_nonprod+RegUser01@colpal.com");
-        loginPage.enterPassword("TestimQA@2024");
+        loginPage.enterEmail(TestData.EMAIL);
+        loginPage.enterPassword(TestData.PASSWORD);
         loginPage.clickFinalLogin();
         System.out.println("Login successful!");
 

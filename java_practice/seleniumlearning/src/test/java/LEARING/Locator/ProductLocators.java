@@ -32,7 +32,7 @@ public class ProductLocators {
     public static By addedToFavoritePopup = By.xpath("//div[contains(text(),'Added To Favorite')]");
     public static By HomeUserIcon = By.xpath("//span[contains(@class,'brand-navigation-header_user-icon')]");
     public static By UserIconFavorite = By.xpath("(//a[text()='Favorites'])[1]");
-    public static By favoriteProductName = By.xpath("//p[contains(@class,'product-name')]");
+    public static By favoriteProductName = By.cssSelector(".product-name:not(.animate-pulse)");
     public static By RemoveFromFavoriteButton = By.xpath("//div[text()='Remove from Favorites']");
     public static By RemoveFromFavoritePopup = By.xpath("//div[contains(text(),'Removed From Favorite')]");
 

@@ -196,7 +196,10 @@ public class ProductPage {
         WebElement productNameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 ProductLocators.product
         ));
-        String productName = productNameElement.getText();
+        String productName = productNameElement.getText().trim();
+
+        // Print product name in console
+        System.out.println("🛍️ Product added to favorites: " + productName);
 
         // Click Favorite button
         WebElement favoriteBtn = wait.until(ExpectedConditions.elementToBeClickable(
@@ -210,10 +213,12 @@ public class ProductPage {
         return productName;
     }
 
+
     public boolean verifyProductInFavorites(String expectedProductName) throws InterruptedException {
 
         Thread.sleep(5000);
-        //Home User Icon
+
+        // Click Home User Icon
         WebElement HomeUserIcon = wait.until(ExpectedConditions.elementToBeClickable(ProductLocators.HomeUserIcon));
         HomeUserIcon.click();
 
@@ -227,10 +232,27 @@ public class ProductPage {
         WebElement favProduct = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 ProductLocators.favoriteProductName
         ));
-        String actualProductName = favProduct.getText();
+        // Wait for actual text content
+        wait.until(driver -> !favProduct.getText().trim().isEmpty());
 
-        return actualProductName.equalsIgnoreCase(expectedProductName);
+        String actualProductName = favProduct.getText().trim();
+
+        // Print both expected and actual names
+        System.out.println("🧾 Expected Product Name: " + expectedProductName);
+        System.out.println("❤️ Product Found in Favorites: " + actualProductName);
+
+        // Compare and return result
+        boolean match = actualProductName.equalsIgnoreCase(expectedProductName);
+
+        if (match) {
+            System.out.println("✅ Product successfully verified in Favorites!");
+        } else {
+            System.out.println("❌ Product mismatch! Expected: " + expectedProductName + ", but found: " + actualProductName);
+        }
+
+        return match;
     }
+
 
     public void cLickRemoveButtonAndVerifyPopup() {
         WebElement removeFromFavoriteBtn = wait.until(ExpectedConditions.elementToBeClickable(
